@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { createStage, checkCollision } from "../gameHelpers";
 
 // styled components
 import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
+import KeyWrapper from './KeyWrapper';
 
 // custom hooks
 import { useInterval } from "../hooks/useInterval";
@@ -25,6 +27,7 @@ const Tetris = () => {
   const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(
     rowsCleared
   );
+  const screenSmall = useMediaQuery('(min-width:600px)');
 
   console.log("re-render");
 
@@ -124,6 +127,7 @@ const Tetris = () => {
           )}
           <StartButton callback={startGame} />
         </aside>
+        {screenSmall ? "" : <KeyWrapper />}
       </StyledTetris>
     </StyledTetrisWrapper>
   );
